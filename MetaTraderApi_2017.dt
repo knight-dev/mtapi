@@ -1,0 +1,723 @@
+<?xml version="1.0" encoding="utf-16"?>
+<DevTrackerData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" SolutionTotalEditTime="PT4H15M45.1512939S" SolutionTotalViewTime="PT4H35M32.1747981S" SolutionTotalDebugTime="PT0S">
+  <FileVersion>
+    <Major>1</Major>
+    <Minor>0</Minor>
+  </FileVersion>
+  <SolutionFolder>C:\Users\Niel\source\repos\mtapi</SolutionFolder>
+  <SolutionCreattionDate>2022-06-14T11:03:27.4470673-05:00</SolutionCreattionDate>
+  <ProjectsCreatedDateList>
+    <ProjectCreated>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MTApiService\MTApiService.csproj</ProjectName>
+      <CreatedDate>2022-06-14T11:01:47.0901051-05:00</CreatedDate>
+    </ProjectCreated>
+    <ProjectCreated>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MTConnector\MTConnector.vcxproj</ProjectName>
+      <CreatedDate>2022-06-14T11:01:47.1151065-05:00</CreatedDate>
+    </ProjectCreated>
+    <ProjectCreated>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MtApi\MtApi.csproj</ProjectName>
+      <CreatedDate>2022-06-14T11:01:47.1521054-05:00</CreatedDate>
+    </ProjectCreated>
+    <ProjectCreated>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MtApi5\MtApi5.csproj</ProjectName>
+      <CreatedDate>2022-06-14T11:01:47.2231069-05:00</CreatedDate>
+    </ProjectCreated>
+    <ProjectCreated>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MT5Connector\MT5Connector.vcxproj</ProjectName>
+      <CreatedDate>2022-06-14T11:01:47.0731058-05:00</CreatedDate>
+    </ProjectCreated>
+    <ProjectCreated>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-06-16T15:29:39.5885424-05:00</CreatedDate>
+    </ProjectCreated>
+  </ProjectsCreatedDateList>
+  <SessionTimeList />
+  <LastSessionTimeList>
+    <DevTrackerDataItem ViewActiveTime="PT11M1.2613942S" EditActiveTime="PT44.2847455S">
+      <ModifiedDate>2022-07-14T22:33:36.409752-05:00</ModifiedDate>
+      <ModifiedBy>Niel</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MirrorTrader\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-07-14T20:38:27.1787753-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+  </LastSessionTimeList>
+  <TotalTimeList>
+    <DevTrackerDataItem ViewActiveTime="PT2.8385799S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\App.xaml</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-16T15:35:47.3743304-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT17.8476988S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\App.xaml.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-16T15:35:50.2279182-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT34.612816S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>2</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\DelegateCommand.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-15T01:21:45.480337-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT20M21.3512402S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>2</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\TestApiClientUI\Form1.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\TestApiClientUI\TestApiClientUI.csproj</ProjectName>
+      <CreatedDate>2022-06-15T01:14:29.2969068-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M28.1778515S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\ListBoxBehavior.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-15T01:22:03.1593769-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT7M41.5911101S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>3</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MTApiService\LogConfigurator.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MTApiService\MTApiService.csproj</ProjectName>
+      <CreatedDate>2022-06-14T11:06:03.4807993-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT44.7523211S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>2</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\obj\Debug\MainWindow.g.i.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-15T01:21:32.465335-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M4.0610767S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>2</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MainWindow.xaml</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-15T01:19:36.8207585-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT9.1689525S" EditActiveTime="PT42.595015S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>2</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MainWindow.xaml.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-15T01:20:00.967019-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT24.4960779S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MqlTradeRequestViewModel.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-16T15:36:25.8535905-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M17.7471387S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>2</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MtApi5Bootstrapper\MtApi5Bootstrapper.wixproj</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-06-14T11:40:08.7534587-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT15.9776907S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MtApi5\MtApi5Client.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MtApi5\MtApi5.csproj</ProjectName>
+      <CreatedDate>2022-06-22T05:39:36.9649448-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M39.2568825S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MtApi5Installer\MtApi5Installer.wixproj</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-06-14T11:23:38.2932891-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT8.9094107S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MtApiBootstrapper\MtApiBootstrapper.wixproj</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-06-14T11:51:28.5251093-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT3M27.2743699S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>2</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MtApiInstaller\MtApiInstaller.wixproj</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-06-14T11:23:28.5653174-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M18.6986253S" EditActiveTime="PT16M30.4111795S">
+      <ModifiedDate>2022-06-20T00:27:19.3462097-05:00</ModifiedDate>
+      <ModifiedBy>Niel</ModifiedBy>
+      <EditedCount>2</EditedCount>
+      <ViewedCount>2</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MirrorTrader\Order.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-06-17T06:23:28.6265385-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT3H52M41.9146326S" EditActiveTime="PT3H58M32.1440979S">
+      <ModifiedDate>2022-07-14T22:33:36.409752-05:00</ModifiedDate>
+      <ModifiedBy>Niel</ModifiedBy>
+      <EditedCount>17</EditedCount>
+      <ViewedCount>18</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MirrorTrader\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-06-16T15:29:40.0835294-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT30.0140363S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\QuoteViewModel.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-16T15:37:07.2864546-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT23.4852882S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\ViewModel.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-15T01:20:42.9916369-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+  </TotalTimeList>
+  <HistoryTimeList>
+    <DevTrackerDataItem ViewActiveTime="PT11M1.2554131S" EditActiveTime="PT44.2847455S">
+      <ModifiedDate>2022-07-14T22:33:36.409752-05:00</ModifiedDate>
+      <ModifiedBy>Niel</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MirrorTrader\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-07-14T20:38:27.1787753-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M41.5761983S" EditActiveTime="PT4.252997S">
+      <ModifiedDate>2022-07-08T05:42:23.9673519-05:00</ModifiedDate>
+      <ModifiedBy>Niel</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MirrorTrader\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-07-08T05:42:17.9593515-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT3.7860011S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MirrorTrader\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-07-07T05:38:42.6568357-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT44.8328891S" EditActiveTime="PT1M9.461438S">
+      <ModifiedDate>2022-07-06T19:42:43.5076077-05:00</ModifiedDate>
+      <ModifiedBy>Niel</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MirrorTrader\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-07-06T19:41:28.6081021-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT18M11.8500439S" EditActiveTime="PT2M2.6431316S">
+      <ModifiedDate>2022-07-06T03:58:17.1096841-05:00</ModifiedDate>
+      <ModifiedBy>Niel</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MirrorTrader\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-07-05T22:48:13.9301468-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT4M25.4113385S" EditActiveTime="PT31.3441732S">
+      <ModifiedDate>2022-07-01T05:51:15.1653551-05:00</ModifiedDate>
+      <ModifiedBy>Niel</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MirrorTrader\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-07-01T05:46:40.9437011-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT50.995117S" EditActiveTime="PT1M54.8635072S">
+      <ModifiedDate>2022-06-30T20:38:40.2425388-05:00</ModifiedDate>
+      <ModifiedBy>Niel</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MirrorTrader\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-06-30T20:36:25.4730528-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT12M54.366176S" EditActiveTime="PT1M9.9613483S">
+      <ModifiedDate>2022-06-30T06:52:11.0881723-05:00</ModifiedDate>
+      <ModifiedBy>Niel</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MirrorTrader\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-06-30T06:33:10.4695927-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT4M55.935635S" EditActiveTime="PT1M33.358536S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MirrorTrader\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-06-29T18:23:17.9922713-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT24M14.0507952S" EditActiveTime="PT43.7832706S">
+      <ModifiedDate>2022-06-29T09:52:48.4566976-05:00</ModifiedDate>
+      <ModifiedBy>Niel</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MirrorTrader\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-06-29T01:25:50.8484059-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M39.6001049S" EditActiveTime="PT1M58.5100923S">
+      <ModifiedDate>2022-06-28T08:49:27.1950722-05:00</ModifiedDate>
+      <ModifiedBy>Niel</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MirrorTrader\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-06-28T05:53:49.0407995-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT15M42.9106974S" EditActiveTime="PT1M1.3925737S">
+      <ModifiedDate>2022-06-27T21:52:02.1475396-05:00</ModifiedDate>
+      <ModifiedBy>Niel</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MirrorTrader\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-06-27T21:28:55.5888783-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT25M40.7475085S" EditActiveTime="PT37M44.0544319S">
+      <ModifiedDate>2022-06-26T22:33:19.7468828-05:00</ModifiedDate>
+      <ModifiedBy>Niel</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MirrorTrader\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-06-26T19:01:07.2069772-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT11M19.5777772S" EditActiveTime="PT19M27.0939921S">
+      <ModifiedDate>2022-06-23T07:10:10.3335224-05:00</ModifiedDate>
+      <ModifiedBy>Niel</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MirrorTrader\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-06-23T06:34:15.3245359-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT15.9776907S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MtApi5\MtApi5Client.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MtApi5\MtApi5.csproj</ProjectName>
+      <CreatedDate>2022-06-22T05:39:36.9649448-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT40M22.9839899S" EditActiveTime="PT1H11M8.7598786S">
+      <ModifiedDate>2022-06-22T05:49:08.879213-05:00</ModifiedDate>
+      <ModifiedBy>Niel</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MirrorTrader\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-06-21T18:05:02.6101071-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT13.0771779S" EditActiveTime="PT10M57.3397242S">
+      <ModifiedDate>2022-06-20T00:27:19.3462097-05:00</ModifiedDate>
+      <ModifiedBy>Niel</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\users\niel\source\repos\mtapi\MirrorTrader\Order.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-06-20T00:02:29.6883579-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT44M12.8143031S" EditActiveTime="PT40M19.398357S">
+      <ModifiedDate>2022-06-20T01:50:23.6651927-05:00</ModifiedDate>
+      <ModifiedBy>Niel</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MirrorTrader\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-06-19T22:44:27.9722433-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M5.6214474S" EditActiveTime="PT5M33.0714553S">
+      <ModifiedDate>2022-06-17T06:47:35.8426235-05:00</ModifiedDate>
+      <ModifiedBy>Niel</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MirrorTrader\Order.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-06-17T06:23:28.6265385-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT12M3.4345094S" EditActiveTime="PT39M34.0846523S">
+      <ModifiedDate>2022-06-17T07:11:23.8144003-05:00</ModifiedDate>
+      <ModifiedBy>Niel</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MirrorTrader\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-06-16T22:19:51.8786011-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT30.0140363S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\QuoteViewModel.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-16T15:37:07.2864546-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT16.9347802S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\DelegateCommand.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-16T15:36:50.3506515-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT24.4960779S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MqlTradeRequestViewModel.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-16T15:36:25.8535905-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT17.8476988S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\App.xaml.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-16T15:35:50.2279182-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2.8385799S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\App.xaml</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-16T15:35:47.3743304-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT31.7392737S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\obj\Debug\MainWindow.g.i.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-16T15:35:35.5301095-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT8.9636851S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MainWindow.xaml.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-16T15:35:26.5664244-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT14.708037S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MainWindow.xaml</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-16T15:35:11.8583874-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M35.8023545S" EditActiveTime="PT17M24.8969726S">
+      <ModifiedDate>2022-06-16T16:03:12.3445082-05:00</ModifiedDate>
+      <ModifiedBy>Niel</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MirrorTrader\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MirrorTrader\MirrorTrader.csproj</ProjectName>
+      <CreatedDate>2022-06-16T15:29:40.0835294-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M20.0750034S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\TestApiClientUI\Form1.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\TestApiClientUI\TestApiClientUI.csproj</ProjectName>
+      <CreatedDate>2022-06-16T15:09:35.8333713-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M28.1778515S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\ListBoxBehavior.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-15T01:22:03.1593769-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT17.6780358S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\DelegateCommand.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-15T01:21:45.480337-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT13.0130474S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\obj\Debug\MainWindow.g.i.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-15T01:21:32.465335-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT23.4852882S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\ViewModel.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-15T01:20:42.9916369-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.2052674S" EditActiveTime="PT42.595015S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MainWindow.xaml.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-15T01:20:00.967019-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT49.3530397S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MainWindow.xaml</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\MtApi5TestClient\MtApi5TestClient.csproj</ProjectName>
+      <CreatedDate>2022-06-15T01:19:36.8207585-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT18M1.2762368S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\TestClients\TestApiClientUI\Form1.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\TestClients\TestApiClientUI\TestApiClientUI.csproj</ProjectName>
+      <CreatedDate>2022-06-15T01:14:29.2969068-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT13.1984182S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MtApi5Bootstrapper\MtApi5Bootstrapper.wixproj</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-06-14T11:51:32.4171621-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT8.9094107S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MtApiBootstrapper\MtApiBootstrapper.wixproj</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-06-14T11:51:28.5251093-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT3M17.549214S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MtApiInstaller\MtApiInstaller.wixproj</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-06-14T11:51:21.5582077-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M31.6431173S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MTApiService\LogConfigurator.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MTApiService\MTApiService.csproj</ProjectName>
+      <CreatedDate>2022-06-14T11:48:49.9130948-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT3M26.534275S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MTApiService\LogConfigurator.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MTApiService\MTApiService.csproj</ProjectName>
+      <CreatedDate>2022-06-14T11:42:13.3041827-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M4.5487205S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MtApi5Bootstrapper\MtApi5Bootstrapper.wixproj</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-06-14T11:40:08.7534587-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M39.2568825S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MtApi5Installer\MtApi5Installer.wixproj</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-06-14T11:23:38.2932891-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT9.7251559S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MtApiInstaller\MtApiInstaller.wixproj</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-06-14T11:23:28.5653174-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M43.4157181S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\Users\Niel\source\repos\mtapi\MTApiService\LogConfigurator.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\Users\Niel\source\repos\mtapi\MTApiService\MTApiService.csproj</ProjectName>
+      <CreatedDate>2022-06-14T11:06:03.4807993-05:00</CreatedDate>
+      <ViewedBy>Niel</ViewedBy>
+    </DevTrackerDataItem>
+  </HistoryTimeList>
+</DevTrackerData>

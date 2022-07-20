@@ -1,0 +1,69 @@
+Application started.
+Source Connnecting...
+Source Connnected.
+Destination Connnecting...
+Destination Connnected.
+Source order opened: EURJPY.pro 0.03 - Type: ORDER_TYPE_SELL, Price: 142.243, Ticket: 100378056, Position: 0, Now: 6/23/2022 3:46:35 AM
+Ask: 142.235, Bid: 142.231
+Destination order opened: EURJPY 0.03 - Type: ORDER_TYPE_SELL_LIMIT, Price: 142.24, Ticket: 6468742, Position: 0, Now: 6/23/2022 3:46:35 AM
+Sell: symbol EURJPY.pro retVal = True, result = Retcode=10009; Comment=Request executed; Deal=0; Order=6468742; Volume=0.03; Price=0; Bid=142.24; Ask=142.24; Request_id=45
+Source order closed: EURJPY.pro 0.03 - Type: ORDER_TYPE_BUY, Price: 142.233, Ticket: 100383480, Position: 100378056, Now: 6/23/2022 3:46:49 AM
+Ask: 142.217, Bid: 142.215
+Close: Position - 6468742 retVal = False
+Close: Position - 6468742 retVal = True
+Source order opened: EURUSD.pro 0.03 - Type: ORDER_TYPE_SELL, Price: 1.05045, Ticket: 100390418, Position: 0, Now: 6/23/2022 3:49:06 AM
+Ask: 1.05033, Bid: 1.0503
+Sell: symbol EURUSD.pro retVal = True, result = Retcode=10009; Comment=Request executed; Deal=0; Order=6468813; Volume=0.03; Price=0; Bid=1.05031; Ask=1.05031; Request_id=47
+Destination order opened: EURUSD 0.03 - Type: ORDER_TYPE_SELL_LIMIT, Price: 1.05031, Ticket: 6468813, Position: 0, Now: 6/23/2022 3:49:06 AM
+Source deal made: EURUSD.pro 0.03 - Type: ORDER_TYPE_BUY, Price: 1.05045, Ticket: 100390418, Position: 100390418, Now: 6/23/2022 3:49:06 AM
+Ask: 1.05033, Bid: 1.0503
+Destination deal made: EURUSD 0.03 - Type: ORDER_TYPE_BUY, Price: 1.05038, Ticket: 6468813, Position: 6468813, Now: 6/23/2022 3:49:08 AM
+Source order closed: EURUSD.pro 0.03 - Type: ORDER_TYPE_BUY, Price: 1.05037, Ticket: 100396272, Position: 100390418, Now: 6/23/2022 3:49:23 AM
+Ask: 1.05031, Bid: 1.05029
+Close: Position - 6468813 retVal = True
+Close: Position - 6468813 retVal = False
+Destination order closed: EURUSD 0.03 - Type: ORDER_TYPE_BUY, Price: 0, Ticket: 6468818, Position: 6468813, Now: 6/23/2022 3:49:23 AM
+Source order opened: EURCHF.pro 0.03 - Type: ORDER_TYPE_SELL, Price: 1.01447, Ticket: 100401603, Position: 0, Now: 6/23/2022 3:51:16 AM
+Ask: 1.01429, Bid: 1.01426
+Sell: symbol EURCHF.pro retVal = True, result = Retcode=10009; Comment=Request executed; Deal=0; Order=6469046; Volume=0.03; Price=0; Bid=1.01437; Ask=1.01437; Request_id=49
+Destination order opened: EURCHF 0.03 - Type: ORDER_TYPE_SELL_LIMIT, Price: 1.01437, Ticket: 6469046, Position: 0, Now: 6/23/2022 3:51:16 AM
+Source deal made: EURCHF.pro 0.03 - Type: ORDER_TYPE_BUY, Price: 1.01447, Ticket: 100401603, Position: 100401603, Now: 6/23/2022 3:51:16 AM
+Ask: 1.01429, Bid: 1.01427
+Source order closed: EURCHF.pro 0.03 - Type: ORDER_TYPE_BUY, Price: 1.01427, Ticket: 100407467, Position: 100401603, Now: 6/23/2022 3:51:32 AM
+Close: Position - 6469046 retVal = False
+Ask: 1.01426, Bid: 1.01424
+Close: Position - 6469046 retVal = True
+Source order opened: GBPUSD.pro 0.03 - Type: ORDER_TYPE_SELL, Price: 1.22112, Ticket: 100413752, Position: 0, Now: 6/23/2022 3:57:01 AM
+Ask: 1.22107, Bid: 1.22102
+Sell: symbol GBPUSD.pro retVal = True, result = Retcode=10009; Comment=Request executed; Deal=0; Order=6469509; Volume=0.03; Price=0; Bid=1.22105; Ask=1.22105; Request_id=51
+Destination order opened: GBPUSD 0.03 - Type: ORDER_TYPE_SELL_LIMIT, Price: 1.22105, Ticket: 6469509, Position: 0, Now: 6/23/2022 3:57:01 AM
+Source deal made: GBPUSD.pro 0.03 - Type: ORDER_TYPE_BUY, Price: 1.22112, Ticket: 100413752, Position: 100413752, Now: 6/23/2022 3:57:01 AM
+Ask: 1.22107, Bid: 1.22102
+Destination deal made: GBPUSD 0.03 - Type: ORDER_TYPE_BUY, Price: 1.2211, Ticket: 6469509, Position: 6469509, Now: 6/23/2022 3:57:27 AM
+Source order closed: GBPUSD.pro 0.03 - Type: ORDER_TYPE_BUY, Price: 1.22103, Ticket: 100418100, Position: 100413752, Now: 6/23/2022 3:57:36 AM
+Ask: 1.2213, Bid: 1.22124
+Close: Position - 6469509 retVal = True
+Close: Position - 6469509 retVal = False
+Destination order closed: GBPUSD 0.03 - Type: ORDER_TYPE_BUY, Price: 0, Ticket: 6469527, Position: 6469509, Now: 6/23/2022 3:57:36 AM
+Source order opened: EURUSD.pro 0.03 - Type: ORDER_TYPE_BUY, Price: 1.05061, Ticket: 100425528, Position: 0, Now: 6/23/2022 4:03:33 AM
+Ask: 1.05082, Bid: 1.0508
+Destination order opened: EURUSD 0.03 - Type: ORDER_TYPE_BUY_LIMIT, Price: 1.0508, Ticket: 6469694, Position: 0, Now: 6/23/2022 4:03:33 AM
+Buy: symbol EURUSD.pro retVal = True, result = Retcode=10009; Comment=Request executed; Deal=0; Order=6469694; Volume=0.03; Price=0; Bid=1.0508; Ask=1.0508; Request_id=53
+Source deal made: EURUSD.pro 0.03 - Type: ORDER_TYPE_BUY, Price: 1.05061, Ticket: 100425528, Position: 100425528, Now: 6/23/2022 4:03:33 AM
+Ask: 1.05082, Bid: 1.0508
+Destination deal made: EURUSD 0.03 - Type: ORDER_TYPE_BUY, Price: 1.05084, Ticket: 6469694, Position: 6469694, Now: 6/23/2022 4:03:34 AM
+Source order closed: EURUSD.pro 0.03 - Type: ORDER_TYPE_SELL, Price: 1.05084, Ticket: 100432827, Position: 100425528, Now: 6/23/2022 4:03:54 AM
+Ask: 1.05083, Bid: 1.0508
+Close: Position - 6469694 retVal = True
+Close: Position - 6469694 retVal = False
+Destination order closed: EURUSD 0.03 - Type: ORDER_TYPE_SELL, Price: 0, Ticket: 6469703, Position: 6469694, Now: 6/23/2022 4:03:54 AM
+Source order opened: XAUUSD.pro 0.03 - Type: ORDER_TYPE_SELL, Price: 1827.05, Ticket: 100437606, Position: 0, Now: 6/23/2022 4:07:12 AM
+Ask: 1826.53, Bid: 1826.33
+Destination order opened: XAUUSD 0.03 - Type: ORDER_TYPE_SELL_LIMIT, Price: 1826.55, Ticket: 6469915, Position: 0, Now: 6/23/2022 4:07:12 AM
+Sell: symbol XAUUSD.pro retVal = True, result = Retcode=10009; Comment=Request executed; Deal=0; Order=6469915; Volume=0.03; Price=0; Bid=1826.55; Ask=1826.55; Request_id=55
+Source deal made: XAUUSD.pro 0.03 - Type: ORDER_TYPE_BUY, Price: 1827.05, Ticket: 100437606, Position: 100437606, Now: 6/23/2022 4:07:12 AM
+Ask: 1826.53, Bid: 1826.33
+Source order closed: XAUUSD.pro 0.03 - Type: ORDER_TYPE_BUY, Price: 1826.5, Ticket: 100443111, Position: 100437606, Now: 6/23/2022 4:07:25 AM
+Ask: 1826.46, Bid: 1826.26
+Close: Position - 6469915 retVal = False
+Close: Position - 6469915 retVal = True

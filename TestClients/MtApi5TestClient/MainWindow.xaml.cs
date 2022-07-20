@@ -28,5 +28,10 @@ namespace MtApi5TestClient
             var regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
+
+        private void Button_Click()
+        {
+
+        }
     }
 }

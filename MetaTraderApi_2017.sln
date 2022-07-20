@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32126.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApiClientUI", "TestClients\TestApiClientUI\TestApiClientUI.csproj", "{663CC515-EAAE-47D4-8933-5008C2DA1160}"
 EndProject
@@ -46,6 +46,8 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "MtApiBootstrapper", "MtApiB
 	ProjectSection(ProjectDependencies) = postProject
 		{78B94552-DB17-40EC-B7C6-23D32DB85DC1} = {78B94552-DB17-40EC-B7C6-23D32DB85DC1}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MirrorTrader", "MirrorTrader\MirrorTrader.csproj", "{DEF1265B-B08B-4157-A6AC-24CE2EA1EC8F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -232,6 +234,22 @@ Global
 		{8E63046B-56E5-4623-8808-558AD72A8F2B}.Release|x64.ActiveCfg = Release|x86
 		{8E63046B-56E5-4623-8808-558AD72A8F2B}.Release|x86.ActiveCfg = Release|x86
 		{8E63046B-56E5-4623-8808-558AD72A8F2B}.Release|x86.Build.0 = Release|x86
+		{DEF1265B-B08B-4157-A6AC-24CE2EA1EC8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEF1265B-B08B-4157-A6AC-24CE2EA1EC8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEF1265B-B08B-4157-A6AC-24CE2EA1EC8F}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{DEF1265B-B08B-4157-A6AC-24CE2EA1EC8F}.Debug|Win32.Build.0 = Debug|Any CPU
+		{DEF1265B-B08B-4157-A6AC-24CE2EA1EC8F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DEF1265B-B08B-4157-A6AC-24CE2EA1EC8F}.Debug|x64.Build.0 = Debug|Any CPU
+		{DEF1265B-B08B-4157-A6AC-24CE2EA1EC8F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DEF1265B-B08B-4157-A6AC-24CE2EA1EC8F}.Debug|x86.Build.0 = Debug|Any CPU
+		{DEF1265B-B08B-4157-A6AC-24CE2EA1EC8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEF1265B-B08B-4157-A6AC-24CE2EA1EC8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEF1265B-B08B-4157-A6AC-24CE2EA1EC8F}.Release|Win32.ActiveCfg = Release|Any CPU
+		{DEF1265B-B08B-4157-A6AC-24CE2EA1EC8F}.Release|Win32.Build.0 = Release|Any CPU
+		{DEF1265B-B08B-4157-A6AC-24CE2EA1EC8F}.Release|x64.ActiveCfg = Release|Any CPU
+		{DEF1265B-B08B-4157-A6AC-24CE2EA1EC8F}.Release|x64.Build.0 = Release|Any CPU
+		{DEF1265B-B08B-4157-A6AC-24CE2EA1EC8F}.Release|x86.ActiveCfg = Release|Any CPU
+		{DEF1265B-B08B-4157-A6AC-24CE2EA1EC8F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -240,5 +258,8 @@ Global
 		{663CC515-EAAE-47D4-8933-5008C2DA1160} = {B91FF338-E05D-4EF1-948B-A2376DB37ECA}
 		{38B9C657-BC2F-44F0-8824-54B31F2A64F5} = {B91FF338-E05D-4EF1-948B-A2376DB37ECA}
 		{EB7C228D-9494-4985-845E-B8312450DF3D} = {B91FF338-E05D-4EF1-948B-A2376DB37ECA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E4462595-205A-4FD7-8454-153571E4E854}
 	EndGlobalSection
 EndGlobal
