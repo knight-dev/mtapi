@@ -20,5 +20,7 @@ namespace MirrorTrader
         public ENUM_ORDER_TYPE OrderType { get; set; }
         public ENUM_TRADE_TRANSACTION_TYPE TransactionType { get; set; }
         public ENUM_TRADE_TRANSACTION_TYPE DealType { get; set; }
+        public System.Timers.Timer timer { get; set; }
+        public bool Closed { get; set; }
     }
 }

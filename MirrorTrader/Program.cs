@@ -7,6 +7,7 @@ using MtApi5;
 using System.Threading;
 using System.IO;
 using Newtonsoft.Json;
+using System.Timers;
 
 namespace MirrorTrader
 {
@@ -38,10 +39,18 @@ namespace MirrorTrader
                 case Mt5ConnectionState.Disconnected:
                     Console.WriteLine($"Source {sourcePort} Disconnected.");
                     _connnectionWaiter.Set();
+                    // attempt reconnect
+                    Thread.Sleep(600000);
+                    _mtapiSource.BeginConnect(sourcePort);
+                    _connnectionWaiter.WaitOne();
                     break;
                 case Mt5ConnectionState.Failed:
                     Console.WriteLine($"Source {sourcePort} Connection failed.");
                     _connnectionWaiter.Set();
+                    // attempt reconnect
+                    Thread.Sleep(600000);
+                    _mtapiSource.BeginConnect(sourcePort);
+                    _connnectionWaiter.WaitOne();
                     break;
             }
         }
@@ -60,10 +69,19 @@ namespace MirrorTrader
                 case Mt5ConnectionState.Disconnected:
                     Console.WriteLine($"Destination {destinationPort} Disconnected.");
                     _connnectionWaiter.Set();
+
+                    // attempt reconnect
+                    Thread.Sleep(600000);
+                    _mtapiDestination.BeginConnect(destinationPort);
+                    _connnectionWaiter.WaitOne();
                     break;
                 case Mt5ConnectionState.Failed:
                     Console.WriteLine($"Destination {destinationPort} Connection failed.");
                     _connnectionWaiter.Set();
+                    // attempt reconnect
+                    Thread.Sleep(600000);
+                    _mtapiDestination.BeginConnect(destinationPort);
+                    _connnectionWaiter.WaitOne();
                     break;
             }
         }
@@ -108,7 +126,8 @@ namespace MirrorTrader
                         // close order
                         //CloseRequest(_mtapiDestination, order.Magic);
                         ClosePendingOrder(_mtapiDestination, order.Magic); // close destination order
-                        CloseLossOrder(_mtapiDestination, order);
+                        //CloseLossOrder(_mtapiDestination, order);
+                        
                         //CheckOrderProfit(_mtapiSource, order);
 
                         // remove from list
@@ -190,7 +209,9 @@ namespace MirrorTrader
                 {
                     if (order.TicketId != orderId)
                     {
-                        // close order
+                        // close order  
+                        order.timer.Stop();
+                        order.timer.Close();
                         DestinationOrderHistory.Remove(order);
                         Console.WriteLine($"Destination order closed: {symbol} {volume} - Type: {orderType}, Price: {price}, Ticket: {orderId}, Position: {position}, Now: {DateTime.Now}");
                     }
@@ -207,8 +228,9 @@ namespace MirrorTrader
                     order.PositionId = position;
 
                     // add to history
-                    DestinationOrderHistory.Add(order);
+                    DestinationOrderHistory.Add(order);                    
 
+                    //
                     Console.WriteLine($"Destination order opened: {symbol} {volume} - Type: {orderType}, Price: {price}, Ticket: {orderId}, Position: {position}, Now: {DateTime.Now}");
                 }
 
@@ -225,6 +247,24 @@ namespace MirrorTrader
                     order.DealId = dealId;
                     order.DealType = transType;
                     order.PositionId = position;
+
+                    // set price if 0
+                    if (price == 0)
+                    {
+                        OrderQuoteRequest(_mtapiDestination, symbol, order);
+                    }
+
+                    // timer 15 mins - close if loss
+                    order.timer = new System.Timers.Timer
+                    {
+                        Interval = 10000
+                    };
+                    order.timer.Enabled = true;
+                    order.timer.Elapsed += (s, ev) => OnTimerEvent(s, ev, order);
+                    // run once
+                    order.timer.AutoReset = true;
+                    order.timer.Start();
+
                     Console.WriteLine($"Destination deal made: {symbol} {volume} - Type: {orderType}, Price: {price}, Ticket: {orderId}, Position: {position}, Now: {DateTime.Now}");
                 }
             }
@@ -233,6 +273,27 @@ namespace MirrorTrader
             //Console.WriteLine($"transaction = {e.Trans}");
             //Console.WriteLine("Trade updated: {0} - {1} : {2}", e.Quote.Instrument, e.Quote.Bid, e.Quote.Ask);
         }
+
+        private static void OnTimerEvent(object sender, ElapsedEventArgs e, Order order)
+        {
+            Console.WriteLine("Close order timer elapsed");
+            System.Timers.Timer timer = (System.Timers.Timer)sender;
+            // close loss order after elpased time
+            if(order != null)
+            {
+                //timer.AutoReset = false;
+                CloseLossOrder(_mtapiDestination, order, timer);
+                //timer.Stop();
+            }
+            else
+            {
+                timer.Stop();
+                timer.Close();
+            }
+            
+            
+        }
+
         static void Main(string[] args)
         {
             Console.WriteLine("Application started.");
@@ -258,18 +319,18 @@ namespace MirrorTrader
             
 
             _mtapiSource.ConnectionStateChanged += _mtapi_SourceConnectionStateChanged;
-            /*_mtapiSource.QuoteAdded += _mtapi_QuoteAdded;
-            _mtapiSource.QuoteRemoved += _mtapi_QuoteRemoved;
-            _mtapiSource.QuoteUpdate += _mtapi_QuoteUpdate;*/
+            //_mtapiSource.QuoteAdded += _mtapi_QuoteAdded;
+            //_mtapiSource.QuoteRemoved += _mtapi_QuoteRemoved;
+            //_mtapiSource.QuoteUpdate += _mtapi_QuoteUpdate;
             _mtapiSource.OnTradeTransaction += _mtapi_SourceTradeUpdate;
 
             _mtapiSource.BeginConnect(sourcePort);
             _connnectionWaiter.WaitOne();
 
             _mtapiDestination.ConnectionStateChanged += _mtapi_DestinationConnectionStateChanged;
-            /*_mtapiDestination.QuoteAdded += _mtapi_QuoteAdded;
-            _mtapiDestination.QuoteRemoved += _mtapi_QuoteRemoved;
-            _mtapiDestination.QuoteUpdate += _mtapi_QuoteUpdate;*/
+            //_mtapiDestination.QuoteAdded += _mtapi_QuoteAdded;
+            //_mtapiDestination.QuoteRemoved += _mtapi_QuoteRemoved;
+            //_mtapiDestination.QuoteUpdate += _mtapi_QuoteUpdate;
             _mtapiDestination.OnTradeTransaction += _mtapi_DestinationTradeUpdate;
 
             _mtapiDestination.BeginConnect(destinationPort);
@@ -388,29 +449,55 @@ namespace MirrorTrader
                 
         }
 
-        private static async void CloseLossOrder(MtApi5Client client, Order order)
+        private static async void CloseLossOrder(MtApi5Client client, Order order, System.Timers.Timer timer = null)
         {
             MqlTradeRequest request = new MqlTradeRequest();
             string symbol = order.Symbol.Replace(".pro", "");
             MqlTick tick = null;
             double profit = 0;
-            var val = await Execute(() => client.SymbolInfoTick(order.Symbol, out tick));
-
-            if (order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_BUY)
+            var val = await Execute(() => client.SymbolInfoTick(symbol, out tick));
+            int digits = tick.bid.ToString().Split('.')[1].Length;
+            Console.WriteLine("digits: " + digits);
+            Console.WriteLine($"Ask: {tick.ask}, Bid: {tick.bid}");
+            Console.WriteLine(order.Price);
+            if (order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_BUY || order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_BUY_LIMIT)
             {
                 var retVal = await Execute(() => client.OrderCalcProfit(order.OrderType, order.Symbol, order.Volume, order.Price, tick.bid, out profit));
-                if(profit < 0)
+                Console.WriteLine("profit: "+Math.Round(profit, 2));
+                double p = (tick.bid - order.Price) * Math.Pow(10, digits);
+                Console.WriteLine("price: " + p);
+                if (p < 0)
                 {
                     //CloseRequest(client, order.Magic);
+                    DestinationCloseRequest(order.TicketId);
+                    if(order.timer != null)
+                    {
+                        order.timer.Enabled = false;
+                        order.timer.Stop();
+                        order.timer.Close();
+                        DestinationOrderHistory.Remove(order);
+                    }
+                    
                 }
                 Console.WriteLine($"Close: Position - {order.TicketId}, Profit: {profit}, retVal = {retVal}");
             }
-            else if (order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_SELL)
+            else if (order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_SELL || order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_SELL_LIMIT)
             {
                 var retVal = await Execute(() => client.OrderCalcProfit(order.OrderType, order.Symbol, order.Volume, order.Price, tick.ask, out profit));
-                if (profit < 0)
+                Console.WriteLine("profit: " + Math.Round(profit, 2));
+                double p = (order.Price - tick.ask) * Math.Pow(10, digits);
+                Console.WriteLine("price: " + p);
+                if (p < 0)
                 {
                     //CloseRequest(client, order.Magic);
+                    DestinationCloseRequest(order.TicketId);
+                    if (order.timer != null)
+                    {
+                        order.timer.Enabled = false;
+                        order.timer.Stop();
+                        order.timer.Close();
+                        DestinationOrderHistory.Remove(order);
+                    }
                 }
                 Console.WriteLine($"Close: Position - {order.TicketId}, Profit: {profit}, retVal = {retVal}");
             }
@@ -435,7 +522,7 @@ namespace MirrorTrader
                     double price = tick.bid - limit;
                     //double price = tick.ask + limit;
                     double diff = Math.Abs(tick.bid - order.Price);
-                    double takeprofit = tick.bid + (diff / 1.4);
+                    double takeprofit = tick.bid + (diff / 1.8);
                     double stoploss = tick.ask - diff;
 
                     MqlTradeRequest request = new MqlTradeRequest();
@@ -467,7 +554,7 @@ namespace MirrorTrader
                     //double price = tick.bid - limit;
                     double price = tick.ask + limit;
                     double diff = Math.Abs(tick.bid - order.Price);
-                    double takeprofit = tick.bid - (diff / 1.4);
+                    double takeprofit = tick.bid - (diff / 1.8);
                     double stoploss = tick.ask + diff;
 
                     MqlTradeRequest request = new MqlTradeRequest();
@@ -503,6 +590,12 @@ namespace MirrorTrader
             Console.WriteLine($"Close: Position - {ticket} retVal = {retVal}");
         }
 
+        private static async void DestinationCloseRequest(ulong ticket)
+        {
+            var retVal = await Execute(() => _mtapiDestination.PositionClose(ticket));
+            Console.WriteLine($"Close: Position - {ticket} retVal = {retVal}");
+        }
+
         private static async void CloseRequest(MtApi5Client client, ulong ticket)
         {
             var retVal = await Execute(() => client.PositionClose(ticket));
@@ -515,6 +608,21 @@ namespace MirrorTrader
             MqlTick tick = null;
             var retVal = await Execute(() => client.SymbolInfoTick(symbol, out tick));
             Console.WriteLine($"Ask: {tick.ask}, Bid: {tick.bid}");
+        }
+
+        private static async void OrderQuoteRequest(MtApi5Client client, string symbol, Order order)
+        {
+            MqlTick tick = null;
+            var retVal = await Execute(() => client.SymbolInfoTick(symbol, out tick));
+            Console.WriteLine($"Ask: {tick.ask}, Bid: {tick.bid}");
+            if (order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_BUY || order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_BUY_LIMIT)
+            {
+                order.Price = tick.bid;
+            }
+            else if (order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_SELL || order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_SELL_LIMIT)
+            {
+                order.Price = tick.ask;
+            }
         }
 
         private static async void Close()
