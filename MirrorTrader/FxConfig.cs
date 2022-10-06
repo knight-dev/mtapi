@@ -11,5 +11,6 @@ namespace MirrorTrader
         public int sourcePort = 8228;
         public int destinationPort = 8229;
         public double lots = 0.03;
+        public int timerDuration = 60;
     }
 }

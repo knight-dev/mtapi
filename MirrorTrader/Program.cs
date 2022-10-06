@@ -21,6 +21,7 @@ namespace MirrorTrader
         static int sourcePort = 8228;
         static int destinationPort = 8229;
         static double lots = 0.03;
+        static int timerDurationSeconds = 60;
         static string configfile = "fxconfig.json";
         //private readonly List<Action> _groupOrderCommands = new List<Action>();
         //private readonly TimerTradeMonitor _timerTradeMonitor;
@@ -257,7 +258,7 @@ namespace MirrorTrader
                     // timer 15 mins - close if loss
                     order.timer = new System.Timers.Timer
                     {
-                        Interval = 10000
+                        Interval = timerDurationSeconds * 1000
                     };
                     order.timer.Enabled = true;
                     order.timer.Elapsed += (s, ev) => OnTimerEvent(s, ev, order);
@@ -306,6 +307,7 @@ namespace MirrorTrader
                 sourcePort = config.sourcePort;
                 destinationPort = config.destinationPort;
                 lots = config.lots;
+                timerDurationSeconds = config.timerDuration;
             }
             else
             {
