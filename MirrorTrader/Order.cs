@@ -11,6 +11,9 @@ namespace MirrorTrader
     {
         public ulong TicketId { get; set; }
         public ulong Magic { get; set; }
+        public DateTime OpenTime { get; set; }
+        public DateTime DealTime { get; set; }
+        public DateTime CloseTime { get; set; }
         public bool Cloned { get; set; }
         public ulong DealId { get; set; }
         public ulong PositionId { get; set; }

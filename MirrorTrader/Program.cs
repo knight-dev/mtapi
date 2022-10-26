@@ -215,6 +215,7 @@ namespace MirrorTrader
                         // close order  
                         order.timer.Stop();
                         order.timer.Close();
+                        order.CloseTime = DateTime.Now.ToUniversalTime();
                         DestinationOrderHistory.Remove(order);
                         Console.WriteLine($"Destination order closed: {symbol} {volume} - Type: {orderType}, Price: {price}, Ticket: {orderId}, Position: {position}, Now: {DateTime.Now}");
                     }
@@ -229,6 +230,7 @@ namespace MirrorTrader
                     order.Volume = volume;
                     order.Symbol = symbol;
                     order.PositionId = position;
+                    order.OpenTime = DateTime.Now.ToUniversalTime();
 
                     // add to history
                     DestinationOrderHistory.Add(order);                    
@@ -250,6 +252,7 @@ namespace MirrorTrader
                     order.DealId = dealId;
                     order.DealType = transType;
                     order.PositionId = position;
+                    order.DealTime = DateTime.Now.ToUniversalTime();
 
                     // set price if 0
                     if (price == 0)
@@ -285,7 +288,7 @@ namespace MirrorTrader
             if(order != null)
             {
                 //timer.AutoReset = false;
-                CloseLossOrder(_mtapiDestination, order, timer);
+                CloseOpenOrder(_mtapiDestination, order, timer);
                 //timer.Stop();
             }
             else
@@ -300,6 +303,10 @@ namespace MirrorTrader
         static void Main(string[] args)
         {
             Console.WriteLine("Application started.");
+            // create orderlog if it doesn't exist
+            Directory.CreateDirectory("logs");
+            //File.Create
+
             if (File.Exists(configfile))
             {
                 string json = File.ReadAllText(configfile);
@@ -455,7 +462,38 @@ namespace MirrorTrader
                 
         }
 
-        private static async void CloseLossOrder(MtApi5Client client, Order order, System.Timers.Timer timer = null)
+        public static void AddOrUpdateOrderLog(Order order) 
+        {
+            try
+            {
+                DateTime now = DateTime.Now.ToUniversalTime();
+                var jamaicaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("SA Pacific Standard Time");
+                var jamaicaTime = TimeZoneInfo.ConvertTimeFromUtc(now, jamaicaTimeZone);
+
+                string today = jamaicaTime.ToString("dd-MM-yy");
+                string dailyLog = "logs/log." + today + ".json"; // log name
+
+                if (!File.Exists(dailyLog))
+                {
+                    File.Create(dailyLog);
+                }
+
+                // open file
+                using (StreamWriter sw = File.AppendText(dailyLog))
+                {
+                    if(order != null)
+                    {
+                        string jsonOrder = JsonConvert.SerializeObject(order);
+                        sw.WriteLine(jsonOrder + ",");
+                    }                    
+                }
+            }catch(Exception ex)
+            {
+                Console.WriteLine("Error logging order: "+ex.ToString());
+            }
+        }
+
+        private static async void CloseOpenOrder(MtApi5Client client, Order order, System.Timers.Timer timer = null)
         {
             MqlTradeRequest request = new MqlTradeRequest();
             string symbol = order.Symbol.Replace(".pro", "");
@@ -470,7 +508,7 @@ namespace MirrorTrader
             if (order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_BUY || order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_BUY_LIMIT)
             {
                 var retVal = await Execute(() => client.OrderCalcProfit(order.OrderType, order.Symbol, order.Volume, order.Price, tick.bid, out profit));
-                Console.WriteLine("profit: "+Math.Round(profit, 2));
+                //Console.WriteLine("profit: "+Math.Round(profit, 2));
                 double p = (tick.bid - order.Price) * Math.Pow(10, digits);
                 Console.WriteLine("price: " + p);
                 
@@ -504,8 +542,11 @@ namespace MirrorTrader
                         order.timer.Enabled = false;
                         order.timer.Stop();
                         order.timer.Close();
+                        order.CloseTime = DateTime.Now.ToUniversalTime();
+                        AddOrUpdateOrderLog(order); // log trade
                         DestinationOrderHistory.Remove(order);
                     }
+                    Console.WriteLine($"Close: Position - {order.TicketId}, Profit: {p}, retVal = {retVal}");
                 }
 
                 // accept loss
@@ -518,16 +559,18 @@ namespace MirrorTrader
                         order.timer.Enabled = false;
                         order.timer.Stop();
                         order.timer.Close();
+                        order.CloseTime = DateTime.Now.ToUniversalTime();
+                        AddOrUpdateOrderLog(order); // log trade
                         DestinationOrderHistory.Remove(order);
                     }
-                    
+                    Console.WriteLine($"Close: Position - {order.TicketId}, Profit: {p}, retVal = {retVal}");
                 }
-                Console.WriteLine($"Close: Position - {order.TicketId}, Profit: {profit}, retVal = {retVal}");
+                
             }
             else if (order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_SELL || order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_SELL_LIMIT)
             {
                 var retVal = await Execute(() => client.OrderCalcProfit(order.OrderType, order.Symbol, order.Volume, order.Price, tick.ask, out profit));
-                Console.WriteLine("profit: " + Math.Round(profit, 2));
+                //Console.WriteLine("profit: " + Math.Round(profit, 2));
                 double p = (order.Price - tick.ask) * Math.Pow(10, digits);
                 Console.WriteLine("price: " + p);
 
@@ -561,8 +604,11 @@ namespace MirrorTrader
                         order.timer.Enabled = false;
                         order.timer.Stop();
                         order.timer.Close();
+                        order.CloseTime = DateTime.Now.ToUniversalTime();
+                        AddOrUpdateOrderLog(order); // log trade
                         DestinationOrderHistory.Remove(order);
                     }
+                    Console.WriteLine($"Close: Position - {order.TicketId}, Profit: {p}, retVal = {retVal}");
                 }
 
                 // accept loss
@@ -575,10 +621,12 @@ namespace MirrorTrader
                         order.timer.Enabled = false;
                         order.timer.Stop();
                         order.timer.Close();
+                        order.CloseTime = DateTime.Now.ToUniversalTime();
+                        AddOrUpdateOrderLog(order); // log trade
                         DestinationOrderHistory.Remove(order);
                     }
+                    Console.WriteLine($"Close: Position - {order.TicketId}, Profit: {p}, retVal = {retVal}");
                 }
-                Console.WriteLine($"Close: Position - {order.TicketId}, Profit: {profit}, retVal = {retVal}");
             }
 
         }
