@@ -22,6 +22,8 @@ namespace MirrorTrader
         static int destinationPort = 8229;
         static double lots = 0.03;
         static int timerDurationSeconds = 60;
+        static double Factor = 0.4;
+        static double ThresholdFactor = 0.2;
         static string configfile = "fxconfig.json";
         //private readonly List<Action> _groupOrderCommands = new List<Action>();
         //private readonly TimerTradeMonitor _timerTradeMonitor;
@@ -308,6 +310,8 @@ namespace MirrorTrader
                 destinationPort = config.destinationPort;
                 lots = config.lots;
                 timerDurationSeconds = config.timerDuration;
+                Factor = config.Factor;
+                ThresholdFactor = config.ThresholdFactor;
             }
             else
             {
@@ -462,13 +466,50 @@ namespace MirrorTrader
             Console.WriteLine("digits: " + digits);
             Console.WriteLine($"Ask: {tick.ask}, Bid: {tick.bid}");
             Console.WriteLine(order.Price);
+
             if (order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_BUY || order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_BUY_LIMIT)
             {
                 var retVal = await Execute(() => client.OrderCalcProfit(order.OrderType, order.Symbol, order.Volume, order.Price, tick.bid, out profit));
                 Console.WriteLine("profit: "+Math.Round(profit, 2));
                 double p = (tick.bid - order.Price) * Math.Pow(10, digits);
                 Console.WriteLine("price: " + p);
-                if (p < 0)
+                
+                if (tick.bid >= order.TP)
+                {
+                    double diff = order.Diff;
+                    order.baseTP = order.TP;
+                    order.thresholdTP = order.Bid + (diff * (order.Factor - ThresholdFactor));
+                    order.TP = order.Bid + (diff * (order.Factor * 2));
+                    order.Factor = order.Factor * 2;
+                    order.Level++;
+                    Console.WriteLine("Level: {0}", order.Level);
+                }
+
+                if (tick.ask > order.HighestPrice)
+                {
+                    order.HighestPrice = tick.ask;
+                }
+                if (tick.bid < order.LowestPrice)
+                {
+                    order.LowestPrice = tick.bid;
+                }
+
+                // take trailed profits
+                if(tick.bid <= order.thresholdTP && order.HighestPrice >= order.baseTP)
+                {
+                    // order reversal - close
+                    DestinationCloseRequest(order.TicketId);
+                    if (order.timer != null)
+                    {
+                        order.timer.Enabled = false;
+                        order.timer.Stop();
+                        order.timer.Close();
+                        DestinationOrderHistory.Remove(order);
+                    }
+                }
+
+                // accept loss
+                if (/*p < 0*/ tick.bid < order.SL)
                 {
                     //CloseRequest(client, order.Magic);
                     DestinationCloseRequest(order.TicketId);
@@ -489,7 +530,43 @@ namespace MirrorTrader
                 Console.WriteLine("profit: " + Math.Round(profit, 2));
                 double p = (order.Price - tick.ask) * Math.Pow(10, digits);
                 Console.WriteLine("price: " + p);
-                if (p < 0)
+
+                if (tick.ask <= order.TP)
+                {
+                    double diff = order.Diff;
+                    order.baseTP = order.TP;
+                    order.thresholdTP = order.Ask - (diff * (order.Factor - ThresholdFactor));
+                    order.TP = order.Ask - (diff * (order.Factor * 2));
+                    order.Factor = order.Factor * 2;
+                    order.Level++;
+                    Console.WriteLine("Level: {0}", order.Level);
+                }
+
+                if (tick.ask > order.HighestPrice)
+                {
+                    order.HighestPrice = tick.ask;
+                }
+                if (tick.bid < order.LowestPrice)
+                {
+                    order.LowestPrice = tick.bid;
+                }
+
+                // take trailed profits
+                if (tick.ask >= order.thresholdTP && order.LowestPrice <= order.baseTP)
+                {
+                    // order reversal - close
+                    DestinationCloseRequest(order.TicketId);
+                    if (order.timer != null)
+                    {
+                        order.timer.Enabled = false;
+                        order.timer.Stop();
+                        order.timer.Close();
+                        DestinationOrderHistory.Remove(order);
+                    }
+                }
+
+                // accept loss
+                if (/*p < 0*/ tick.ask > order.SL)
                 {
                     //CloseRequest(client, order.Magic);
                     DestinationCloseRequest(order.TicketId);
@@ -524,15 +601,26 @@ namespace MirrorTrader
                     double price = tick.bid - limit;
                     //double price = tick.ask + limit;
                     double diff = Math.Abs(tick.bid - order.Price);
-                    double takeprofit = tick.bid + (diff / 1.8);
+                    double takeprofit = tick.bid + (diff * Factor);
                     double stoploss = tick.ask - diff;
+
+                    // setup trailing info
+                    order.Ask = tick.ask;
+                    order.Bid = tick.bid;
+                    order.HighestPrice = tick.ask;
+                    order.LowestPrice = tick.bid;
+                    order.Diff = diff;
+                    order.Factor = Factor;
+                    order.baseTP = takeprofit;
+                    order.TP = takeprofit;
+                    order.SL = stoploss;
 
                     MqlTradeRequest request = new MqlTradeRequest();
                     request.Action = ENUM_TRADE_REQUEST_ACTIONS.TRADE_ACTION_PENDING;
                     request.Symbol = symbol;
                     request.Volume = order.Volume;
                     request.Price = price;
-                    request.Tp = takeprofit;
+                    //request.Tp = takeprofit;
                     //request.Sl = stoploss;
                     request.Type = ENUM_ORDER_TYPE.ORDER_TYPE_BUY_LIMIT;
                     request.Type_filling = ENUM_ORDER_TYPE_FILLING.ORDER_FILLING_RETURN;
@@ -556,15 +644,26 @@ namespace MirrorTrader
                     //double price = tick.bid - limit;
                     double price = tick.ask + limit;
                     double diff = Math.Abs(tick.bid - order.Price);
-                    double takeprofit = tick.bid - (diff / 1.8);
+                    double takeprofit = tick.bid - (diff * Factor);
                     double stoploss = tick.ask + diff;
+
+                    // setup trailing info
+                    order.Ask = tick.ask;
+                    order.Bid = tick.bid;
+                    order.HighestPrice = tick.ask;
+                    order.LowestPrice = tick.bid;
+                    order.Diff = diff;
+                    order.Factor = Factor;
+                    order.baseTP = takeprofit;
+                    order.TP = takeprofit;
+                    order.SL = stoploss;
 
                     MqlTradeRequest request = new MqlTradeRequest();
                     request.Action = ENUM_TRADE_REQUEST_ACTIONS.TRADE_ACTION_PENDING;
                     request.Symbol = symbol;
                     request.Volume = order.Volume;
                     request.Price = price;
-                    request.Tp = takeprofit;
+                    //request.Tp = takeprofit;
                     //request.Sl = stoploss;
                     request.Type = ENUM_ORDER_TYPE.ORDER_TYPE_SELL_LIMIT;
                     request.Type_filling = ENUM_ORDER_TYPE_FILLING.ORDER_FILLING_RETURN;

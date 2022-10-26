@@ -2,5 +2,7 @@
   "sourcePort": 8228,
   "destinationPort": 8229,
   "lots": 0.04,
-  "timerDuration": 60
+  "timerDuration": 10,
+  "factor": 0.4,
+  "thresholdFactor": 0.2
 }
