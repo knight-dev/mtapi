@@ -37,5 +37,6 @@ namespace MirrorTrader
         public ENUM_TRADE_TRANSACTION_TYPE DealType { get; set; }
         public System.Timers.Timer timer { get; set; }
         public bool Closed { get; set; }
+        public string Comment { get; set; }
     }
 }
