@@ -17,6 +17,7 @@ namespace MirrorTrader
         static readonly MtApi5Client _mtapiSource = new MtApi5Client();
         static readonly MtApi5Client _mtapiDestination = new MtApi5Client();
         static List<Order> SourceOrderHistory = new List<Order>();
+        static List<Order> SourceOrderList = new List<Order>();
         static List<Order> DestinationOrderHistory = new List<Order>();
         static int sourcePort = 8228;
         static int destinationPort = 8229;
@@ -117,11 +118,12 @@ namespace MirrorTrader
             var symbol = e.Trans.Symbol;
             var dealId = e.Trans.Deal;
             var price = e.Trans.Price;
+            //var comment = e.Trans.
 
             // order opened
             if(transType == ENUM_TRADE_TRANSACTION_TYPE.TRADE_TRANSACTION_ORDER_ADD)
             {
-                Order order = SourceOrderHistory.Where(x => x.TicketId == position).FirstOrDefault();
+                Order order = SourceOrderList.Where(x => x.TicketId == position).FirstOrDefault();
                 if (order != null)
                 {
                     if (order.TicketId != orderId)
@@ -134,7 +136,7 @@ namespace MirrorTrader
                         //CheckOrderProfit(_mtapiSource, order);
 
                         // remove from list
-                        SourceOrderHistory.Remove(order);
+                        SourceOrderList.Remove(order);
                         Console.ForegroundColor = ConsoleColor.Red;
                         QuoteRequest(_mtapiSource, symbol);
                         Console.WriteLine($"Source order closed: {symbol} {volume} - Type: {orderType}, Price: {price}, Ticket: {orderId}, Position: {position}, Now: {DateTime.Now}");
@@ -158,7 +160,8 @@ namespace MirrorTrader
                     PendingOrderRequest(_mtapiDestination, order);
 
                     // add to history
-                    SourceOrderHistory.Add(order);
+                    SourceOrderList.Add(order); // orders removed once closed
+                    SourceOrderHistory.Add(order); // orders not removed.. keep a full log to compare with destination orders
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     QuoteRequest(_mtapiSource, symbol);
                     Console.WriteLine($"Source order opened: {symbol} {volume} - Type: {orderType}, Price: {price}, Ticket: {orderId}, Position: {position}, Now: {DateTime.Now}");
@@ -170,7 +173,7 @@ namespace MirrorTrader
             // order opened
             if (transType == ENUM_TRADE_TRANSACTION_TYPE.TRADE_TRANSACTION_DEAL_ADD)
             {
-                Order order = SourceOrderHistory.Where(x => x.TicketId == orderId).FirstOrDefault();
+                Order order = SourceOrderList.Where(x => x.TicketId == orderId).FirstOrDefault();
                 if(order != null)
                 {
                     // update order deal
@@ -181,7 +184,7 @@ namespace MirrorTrader
 
                     Console.ForegroundColor = ConsoleColor.Green;
                     QuoteRequest(_mtapiSource, symbol);
-                    Console.WriteLine($"Source deal made: {symbol} {volume} - Type: {orderType}, Price: {price}, Ticket: {orderId}, Position: {position}, Now: {DateTime.Now}");
+                    Console.WriteLine($"Source deal made (Ticket:{orderId}, Position:{position}): {symbol} {volume} - Type: {orderType}, Price: {price}, Ticket: {orderId}, Position: {position}, Now: {DateTime.Now}");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
@@ -231,12 +234,15 @@ namespace MirrorTrader
                     order.Symbol = symbol;
                     order.PositionId = position;
                     order.OpenTime = DateTime.Now.ToUniversalTime();
+                    order.Factor = Factor;
+                    order.ThresholdFactor = ThresholdFactor;
+                    order.Price = price;
 
                     // add to history
                     DestinationOrderHistory.Add(order);                    
 
                     //
-                    Console.WriteLine($"Destination order opened: {symbol} {volume} - Type: {orderType}, Price: {price}, Ticket: {orderId}, Position: {position}, Now: {DateTime.Now}");
+                    Console.WriteLine($"Destination order opened (Ticket:{orderId}, Position:{position}): {symbol} {volume} - Type: {orderType}, Price: {price}, Ticket: {orderId}, Position: {position}, Now: {DateTime.Now.ToUniversalTime()}");
                 }
 
             }
@@ -248,12 +254,21 @@ namespace MirrorTrader
                 if (order != null)
                 {
                     // update order deal
-                    order.Price = price;
+                    
                     order.DealId = dealId;
                     order.DealType = transType;
                     order.PositionId = position;
                     order.DealTime = DateTime.Now.ToUniversalTime();
-
+                    Order sourceOrder = SourceOrderHistory.Where(x => x.Magic == position || x.Magic == orderId).FirstOrDefault();
+                    order.Ask = sourceOrder != null ? sourceOrder.Ask : -1;
+                    order.Bid = sourceOrder != null ? sourceOrder.Bid : -1;
+                    order.Price = sourceOrder != null ? sourceOrder.Price : price;
+                    order.Diff = sourceOrder != null ? sourceOrder.Diff : -1;
+                    order.TP = sourceOrder != null ? sourceOrder.TP : -1;
+                    order.baseTP = sourceOrder != null ? sourceOrder.baseTP : -1;
+                    order.thresholdTP = sourceOrder != null ? sourceOrder.thresholdTP : -1;
+                    order.SL = sourceOrder != null ? sourceOrder.SL : -1;
+                    Console.WriteLine("source: {0}",sourceOrder);
                     // set price if 0
                     if (price == 0)
                     {
@@ -271,7 +286,7 @@ namespace MirrorTrader
                     order.timer.AutoReset = true;
                     order.timer.Start();
 
-                    Console.WriteLine($"Destination deal made: {symbol} {volume} - Type: {orderType}, Price: {price}, Ticket: {orderId}, Position: {position}, Now: {DateTime.Now}");
+                    Console.WriteLine($"Destination deal made(Ticket:{orderId}, Position:{position}): {symbol} {volume} - Type: {orderType}, Price: {price}, Ticket: {orderId}, Position: {position}, Now: {DateTime.Now.ToUniversalTime()}");
                 }
             }
 
@@ -500,17 +515,18 @@ namespace MirrorTrader
             MqlTick tick = null;
             double profit = 0;
             var val = await Execute(() => client.SymbolInfoTick(symbol, out tick));
-            int digits = tick.bid.ToString().Split('.')[1].Length;
+            long digits = await Execute(() => client.SymbolInfoInteger(symbol, ENUM_SYMBOL_INFO_INTEGER.SYMBOL_DIGITS));
+            //int digits = tick.bid.ToString().Split('.')[1].Length;
             Console.WriteLine("digits: " + digits);
             Console.WriteLine($"Ask: {tick.ask}, Bid: {tick.bid}");
-            Console.WriteLine(order.Price);
+            //Console.WriteLine(order.Price);
 
             if (order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_BUY || order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_BUY_LIMIT)
             {
-                var retVal = await Execute(() => client.OrderCalcProfit(order.OrderType, order.Symbol, order.Volume, order.Price, tick.bid, out profit));
+                //var retVal = await Execute(() => client.OrderCalcProfit(order.OrderType, order.Symbol, order.Volume, order.Price, tick.bid, out profit));
                 //Console.WriteLine("profit: "+Math.Round(profit, 2));
                 double p = (tick.bid - order.Price) * Math.Pow(10, digits);
-                Console.WriteLine("price: " + p);
+                //Console.WriteLine("price: " + p);
                 
                 if (tick.bid >= order.TP)
                 {
@@ -518,9 +534,10 @@ namespace MirrorTrader
                     order.baseTP = order.TP;
                     order.thresholdTP = order.Bid + (diff * (order.Factor - ThresholdFactor));
                     order.TP = order.Bid + (diff * (order.Factor * 2));
-                    order.Factor = order.Factor * 2;
+                    order.Factor = Math.Round(order.Factor * 2, 2);
                     order.Level++;
-                    Console.WriteLine("Level: {0}", order.Level);
+                    //Console.WriteLine("Level: {0}", order.Level);
+                    Console.WriteLine($"Buy {symbol} ID - {order.TicketId}, Profit: {p}, Level = {order.Level}, Diff: {order.Diff}, TP: {order.TP}, SL: {order.SL}, baseTP: {order.baseTP}, thresholdTP: {order.thresholdTP}, factor: {order.Factor}, thresholdFactor: {order.ThresholdFactor}, highPrice: {order.HighestPrice}, lowPrice: {order.LowestPrice}");
                 }
 
                 if (tick.ask > order.HighestPrice)
@@ -543,10 +560,10 @@ namespace MirrorTrader
                         order.timer.Stop();
                         order.timer.Close();
                         order.CloseTime = DateTime.Now.ToUniversalTime();
-                        AddOrUpdateOrderLog(order); // log trade
+                        //AddOrUpdateOrderLog(order); // log trade
                         DestinationOrderHistory.Remove(order);
                     }
-                    Console.WriteLine($"Close: Position - {order.TicketId}, Profit: {p}, retVal = {retVal}");
+                    Console.WriteLine($"Close: Position - {order.TicketId}, Profit: {p}");
                 }
 
                 // accept loss
@@ -560,10 +577,10 @@ namespace MirrorTrader
                         order.timer.Stop();
                         order.timer.Close();
                         order.CloseTime = DateTime.Now.ToUniversalTime();
-                        AddOrUpdateOrderLog(order); // log trade
+                        //AddOrUpdateOrderLog(order); // log trade
                         DestinationOrderHistory.Remove(order);
                     }
-                    Console.WriteLine($"Close: Position - {order.TicketId}, Profit: {p}, retVal = {retVal}");
+                    Console.WriteLine($"Close: Position - {order.TicketId}, Profit: {p}");
                 }
                 
             }
@@ -572,17 +589,18 @@ namespace MirrorTrader
                 var retVal = await Execute(() => client.OrderCalcProfit(order.OrderType, order.Symbol, order.Volume, order.Price, tick.ask, out profit));
                 //Console.WriteLine("profit: " + Math.Round(profit, 2));
                 double p = (order.Price - tick.ask) * Math.Pow(10, digits);
-                Console.WriteLine("price: " + p);
+                //Console.WriteLine("price: " + p);
 
                 if (tick.ask <= order.TP)
                 {
                     double diff = order.Diff;
                     order.baseTP = order.TP;
-                    order.thresholdTP = order.Ask - (diff * (order.Factor - ThresholdFactor));
-                    order.TP = order.Ask - (diff * (order.Factor * 2));
-                    order.Factor = order.Factor * 2;
+                    order.thresholdTP = order.Bid - (diff * (order.Factor - ThresholdFactor));
+                    order.TP = order.Bid - (diff * (order.Factor * 2));
+                    order.Factor = Math.Round(order.Factor * 2, 2);
                     order.Level++;
-                    Console.WriteLine("Level: {0}", order.Level);
+                    //Console.WriteLine("Level: {0}", order.Level);
+                    Console.WriteLine($"Sell {symbol} ID - {order.TicketId}, Profit: {p}, Level = {order.Level}, Diff: {order.Diff}, TP: {order.TP}, SL: {order.SL}, baseTP: {order.baseTP}, thresholdTP: {order.thresholdTP}, factor: {order.Factor}, thresholdFactor: {order.ThresholdFactor}, highPrice: {order.HighestPrice}, lowPrice: {order.LowestPrice}");
                 }
 
                 if (tick.ask > order.HighestPrice)
@@ -605,7 +623,7 @@ namespace MirrorTrader
                         order.timer.Stop();
                         order.timer.Close();
                         order.CloseTime = DateTime.Now.ToUniversalTime();
-                        AddOrUpdateOrderLog(order); // log trade
+                        //AddOrUpdateOrderLog(order); // log trade
                         DestinationOrderHistory.Remove(order);
                     }
                     Console.WriteLine($"Close: Position - {order.TicketId}, Profit: {p}, retVal = {retVal}");
@@ -622,7 +640,7 @@ namespace MirrorTrader
                         order.timer.Stop();
                         order.timer.Close();
                         order.CloseTime = DateTime.Now.ToUniversalTime();
-                        AddOrUpdateOrderLog(order); // log trade
+                        //AddOrUpdateOrderLog(order); // log trade
                         DestinationOrderHistory.Remove(order);
                     }
                     Console.WriteLine($"Close: Position - {order.TicketId}, Profit: {p}, retVal = {retVal}");
@@ -648,10 +666,10 @@ namespace MirrorTrader
                     double limit = spread * factor;
                     double price = tick.bid - limit;
                     //double price = tick.ask + limit;
-                    double diff = Math.Abs(tick.bid - order.Price);
-                    double takeprofit = tick.bid + (diff * Factor);
-                    double stoploss = tick.ask - diff;
-
+                    double diff = Math.Round(Math.Abs(tick.bid - order.Price),5);
+                    double takeprofit = Math.Round((tick.bid + (diff * Factor)), 5);
+                    double stoploss = Math.Round((tick.ask - diff), 5);
+                    Console.WriteLine($"Buy: symbol {order.Symbol}, diff = {diff}, bid = {tick.bid}, openprice = {order.Price}, tp = {takeprofit}, sl = {stoploss}");
                     // setup trailing info
                     order.Ask = tick.ask;
                     order.Bid = tick.bid;
@@ -676,7 +694,7 @@ namespace MirrorTrader
 
                     retVal = await Execute(() => client.OrderSend(request, out tradeResult));
                     order.Magic = tradeResult.Order;
-                    Console.WriteLine($"Buy: symbol {order.Symbol} retVal = {retVal}, result = {tradeResult}");
+                    Console.WriteLine($"Buy pending: {order.Symbol} retVal = {retVal}, result = {tradeResult}");
                 }
 
             }
@@ -691,10 +709,10 @@ namespace MirrorTrader
                     double limit = spread * factor;
                     //double price = tick.bid - limit;
                     double price = tick.ask + limit;
-                    double diff = Math.Abs(tick.bid - order.Price);
-                    double takeprofit = tick.bid - (diff * Factor);
-                    double stoploss = tick.ask + diff;
-
+                    double diff = Math.Round(Math.Abs(tick.bid - order.Price), 5);
+                    double takeprofit = Math.Round((tick.bid - (diff * Factor)), 5);
+                    double stoploss = Math.Round((tick.ask + diff), 2);
+                    Console.WriteLine($"Sell: {order.Symbol}, diff = {diff}, bid = {tick.bid}, openprice = {order.Price}, tp = {takeprofit}, sl = {stoploss}");
                     // setup trailing info
                     order.Ask = tick.ask;
                     order.Bid = tick.bid;
@@ -720,7 +738,7 @@ namespace MirrorTrader
 
                     retVal = await Execute(() => client.OrderSend(request, out tradeResult));
                     order.Magic = tradeResult.Order;
-                    Console.WriteLine($"Sell: symbol {order.Symbol} retVal = {retVal}, result = {tradeResult}");
+                    Console.WriteLine($"Sell pending: {order.Symbol} retVal = {retVal}, result = {tradeResult}");
                 }
             }
 
@@ -776,7 +794,7 @@ namespace MirrorTrader
 
         private static async void Close()
         {
-            ulong ticket = SourceOrderHistory.Last().TicketId;
+            ulong ticket = SourceOrderList.Last().TicketId;
             var retVal = await Execute(() => _mtapiSource.PositionClose(ticket));
             Console.WriteLine($"Close: Position - {ticket} retVal = {retVal}");
         }
