@@ -19,6 +19,7 @@ namespace MirrorTrader
         public ulong PositionId { get; set; }
         public string Symbol { get; set; }
         public double Price { get; set; }
+        public double SourcePrice { get; set; }
         public double HighestPrice { get; set; }
         public double LowestPrice { get; set; }
         public double Ask { get; set; }
