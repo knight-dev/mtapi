@@ -700,7 +700,7 @@ namespace MirrorTrader
 
                     retVal = await Execute(() => client.OrderSend(request, out tradeResult));
                     order.Magic = tradeResult.Order;
-                    Console.WriteLine($"Buy pending: {order.Symbol} retVal = {retVal}, result = {tradeResult}");
+                    Console.WriteLine($"Sell pending: {order.Symbol} retVal = {retVal}, result = {tradeResult}");
                 }
 
             }
@@ -717,7 +717,7 @@ namespace MirrorTrader
                     //double price = tick.ask + limit;
                     double diff = Math.Round(Math.Abs(tick.bid - order.Price), 5);
                     double takeprofit = Math.Round((tick.bid + (diff * Factor)), 5)/*Math.Round((tick.bid - (diff * Factor)), 5)*/;
-                    double stoploss = Math.Round((tick.ask - diff), 2)/*Math.Round((tick.ask + diff), 2)*/;
+                    double stoploss = Math.Round((tick.ask - diff), 5)/*Math.Round((tick.ask + diff), 5)*/;
                     //Console.WriteLine($"Sell: {order.Symbol}, diff = {diff}, bid = {tick.bid}, openprice = {order.Price}, tp = {takeprofit}, sl = {stoploss}");
                     // setup trailing info
                     order.Ask = tick.ask;
@@ -744,7 +744,7 @@ namespace MirrorTrader
 
                     retVal = await Execute(() => client.OrderSend(request, out tradeResult));
                     order.Magic = tradeResult.Order;
-                    Console.WriteLine($"Sell pending: {order.Symbol} retVal = {retVal}, result = {tradeResult}");
+                    Console.WriteLine($"Buy pending: {order.Symbol} retVal = {retVal}, result = {tradeResult}");
                 }
             }
 
