@@ -662,7 +662,7 @@ namespace MirrorTrader
             string symbol = order.Symbol.Replace(".pro", "");
             int factor = 1;
 
-            if (order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_BUY)
+            if (order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_SELL)
             {
                 MqlTick tick = null;
                 var val = await Execute(() => client.SymbolInfoTick(symbol, out tick));
@@ -705,7 +705,7 @@ namespace MirrorTrader
 
             }
 
-            if (order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_SELL)
+            if (order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_BUY)
             {
                 MqlTick tick = null;
                 var val = await Execute(() => client.SymbolInfoTick(symbol, out tick));
