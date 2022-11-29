@@ -3,6 +3,6 @@
   "destinationPort": 8229,
   "lots": 1,
   "timerDuration": 7,
-  "factor": 0.3,
-  "thresholdFactor": 0.15
+  "factor": 0.20,
+  "thresholdFactor": 0.10
 }

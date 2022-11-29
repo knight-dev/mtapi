@@ -524,7 +524,7 @@ namespace MirrorTrader
             //Console.WriteLine(order.Price);
 
             // yeahh...this trailing algo is the reverse of what it should but it works...
-            if (/*order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_BUY || */order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_BUY_LIMIT)
+            if (order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_BUY_STOP || order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_BUY_LIMIT)
             {
                 //var retVal = await Execute(() => client.OrderCalcProfit(order.OrderType, order.Symbol, order.Volume, order.Price, tick.bid, out profit));
                 //Console.WriteLine("profit: "+Math.Round(profit, 2));
@@ -589,7 +589,7 @@ namespace MirrorTrader
                 }
                 
             }
-            else if (/*order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_SELL ||*/ order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_SELL_LIMIT)
+            else if (order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_SELL_STOP || order.OrderType == ENUM_ORDER_TYPE.ORDER_TYPE_SELL_LIMIT)
             {
                 //var retVal = await Execute(() => client.OrderCalcProfit(order.OrderType, order.Symbol, order.Volume, order.Price, tick.ask, out profit));
                 //Console.WriteLine("profit: " + Math.Round(profit, 2));
@@ -655,6 +655,21 @@ namespace MirrorTrader
 
         }
 
+        static int guessDigits(double price1, double price2, double price3)
+        {
+            int l1 = price1.ToString().Length;
+            int l2 = price2.ToString().Length;
+            int l3 = price3.ToString().Length;
+
+            int digits = 5;
+
+            if(l1 > l2) digits = l1;
+            if(l2 > l3) digits = l2;
+            if(l3 > l1) digits = l3;
+
+            return digits;
+        }
+
         private static async void PendingOrderRequest(MtApi5Client client, Order order)
         {
             MqlTradeResult tradeResult = null;
@@ -670,9 +685,30 @@ namespace MirrorTrader
                 {
                     double spread = tick.ask - tick.bid;
                     double limit = spread * factor;
-                    //double price = tick.bid - limit;
+                    double price1 = tick.bid - limit;
                     double price = tick.ask + limit;
                     double diff = Math.Round(Math.Abs(tick.bid - order.Price),5);
+                    // fake diff since it's zero
+                    if(diff == 0)
+                    {
+                        diff = Math.Round(Math.Abs(tick.ask - order.Price), 5);
+                        diff = diff * 10;
+
+                        // if still zero, do this
+                        if(diff == 0)
+                        {
+                            int digits = guessDigits(tick.ask, tick.bid, order.Price);
+                            
+                            if(digits == 5 || digits == 4)
+                            diff = 0.0001;
+
+                            if (digits == 3)
+                                diff = 0.001;
+
+                            if (digits == 2)
+                                diff = 0.01;
+                        }
+                    }
                     double takeprofit = Math.Round((tick.bid - (diff * Factor)), 5)/*Math.Round((tick.bid + (diff * Factor)), 5)*/;
                     double stoploss = Math.Round((tick.ask + diff), 5)/*Math.Round((tick.ask - diff), 5)*/;
                     //Console.WriteLine($"Buy: symbol {order.Symbol}, diff = {diff}, bid = {tick.bid}, openprice = {order.Price}, tp = {takeprofit}, sl = {stoploss}");
@@ -694,7 +730,8 @@ namespace MirrorTrader
                     request.Price = price;
                     //request.Tp = takeprofit;
                     //request.Sl = stoploss;
-                    request.Type = ENUM_ORDER_TYPE.ORDER_TYPE_SELL_LIMIT/*ENUM_ORDER_TYPE.ORDER_TYPE_BUY_LIMIT*/;
+                    //request.Type = ENUM_ORDER_TYPE.ORDER_TYPE_SELL_LIMIT/*ENUM_ORDER_TYPE.ORDER_TYPE_BUY_LIMIT*/;
+                    request.Type = ENUM_ORDER_TYPE.ORDER_TYPE_BUY_STOP;
                     request.Type_filling = ENUM_ORDER_TYPE_FILLING.ORDER_FILLING_RETURN;
                     request.Type_time = ENUM_ORDER_TYPE_TIME.ORDER_TIME_DAY;
 
@@ -714,8 +751,29 @@ namespace MirrorTrader
                     double spread = tick.ask - tick.bid;
                     double limit = spread * factor;
                     double price = tick.bid - limit;
-                    //double price = tick.ask + limit;
+                    double price1 = tick.ask + limit;
                     double diff = Math.Round(Math.Abs(tick.bid - order.Price), 5);
+                    // fake diff since it's zero
+                    if (diff == 0)
+                    {
+                        diff = Math.Round(Math.Abs(tick.ask - order.Price), 5);
+                        diff = diff * 10;
+
+                        // if still zero, do this
+                        if (diff == 0)
+                        {
+                            int digits = guessDigits(tick.ask, tick.bid, order.Price);
+
+                            if (digits == 5 || digits == 4)
+                                diff = 0.0001;
+
+                            if (digits == 3)
+                                diff = 0.001;
+
+                            if (digits == 2)
+                                diff = 0.01;
+                        }
+                    }
                     double takeprofit = Math.Round((tick.bid + (diff * Factor)), 5)/*Math.Round((tick.bid - (diff * Factor)), 5)*/;
                     double stoploss = Math.Round((tick.ask - diff), 5)/*Math.Round((tick.ask + diff), 5)*/;
                     //Console.WriteLine($"Sell: {order.Symbol}, diff = {diff}, bid = {tick.bid}, openprice = {order.Price}, tp = {takeprofit}, sl = {stoploss}");
@@ -737,7 +795,8 @@ namespace MirrorTrader
                     request.Price = price;
                     //request.Tp = takeprofit;
                     //request.Sl = stoploss;
-                    request.Type = ENUM_ORDER_TYPE.ORDER_TYPE_BUY_LIMIT/*ENUM_ORDER_TYPE.ORDER_TYPE_SELL_LIMIT*/;
+                    //request.Type = ENUM_ORDER_TYPE.ORDER_TYPE_BUY_LIMIT/*ENUM_ORDER_TYPE.ORDER_TYPE_SELL_LIMIT*/;
+                    request.Type = ENUM_ORDER_TYPE.ORDER_TYPE_SELL_STOP;
                     request.Type_filling = ENUM_ORDER_TYPE_FILLING.ORDER_FILLING_RETURN;
                     request.Type_time = ENUM_ORDER_TYPE_TIME.ORDER_TIME_DAY;
                     //request.
