@@ -532,6 +532,16 @@ namespace MirrorTrader
                 Console.WriteLine($"{symbol} {order.OrderType}_ID - {order.TicketId} - Open Price: {order.Price}, Ask: {tick.ask}, Bid: {tick.bid}, Profit: {p}, Level: {order.Level}, SL: {order.SL}");
                 //Console.WriteLine("price: " + p);
 
+                // adjust sl if too high initially
+                if(order.Level == 0 && tick.bid >= order.SL)
+                {
+                    double takeprofit = Math.Round((tick.ask + (order.Diff * Factor)), 5);
+                    double stoploss = Math.Round((tick.bid - order.Diff), 5);
+
+                    order.TP = takeprofit;
+                    order.SL = stoploss;
+                }
+
                 if (tick.ask >= order.TP)
                 {
                     double diff = order.Diff;
@@ -595,6 +605,16 @@ namespace MirrorTrader
                 //Console.WriteLine("profit: " + Math.Round(profit, 2));
                 double p = Math.Round((order.Price - tick.ask) * Math.Pow(10, digits), 2);
                 Console.WriteLine($"{symbol} {order.OrderType}_ID - {order.TicketId} - Open Price: {order.Price}, Ask: {tick.ask}, Bid: {tick.bid}, Profit: {p}, Level: {order.Level}, SL: {order.SL}");
+
+                // adjust sl if too low initially
+                if (order.Level == 0 && tick.ask <= order.SL)
+                {
+                    double takeprofit = Math.Round((tick.bid - (order.Diff * Factor)), 5);
+                    double stoploss = Math.Round((tick.ask + order.Diff), 5);
+
+                    order.TP = takeprofit;
+                    order.SL = stoploss;
+                }
 
                 if (tick.ask <= order.TP)
                 {
@@ -691,8 +711,10 @@ namespace MirrorTrader
                     // fake diff since it's zero
                     if(diff == 0)
                     {
+                        // try to get next tick
+                        await Execute(() => client.SymbolInfoTick(symbol, out tick));
                         diff = Math.Round(Math.Abs(tick.ask - order.Price), 5);
-                        diff = diff * 10;
+                        //diff = diff * 10;
 
                         // if still zero, do this
                         if(diff == 0)
@@ -756,8 +778,10 @@ namespace MirrorTrader
                     // fake diff since it's zero
                     if (diff == 0)
                     {
+                        // try to get next tick
+                        await Execute(() => client.SymbolInfoTick(symbol, out tick));
                         diff = Math.Round(Math.Abs(tick.ask - order.Price), 5);
-                        diff = diff * 10;
+                        //diff = diff * 10;
 
                         // if still zero, do this
                         if (diff == 0)
