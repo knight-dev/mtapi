@@ -529,7 +529,7 @@ namespace MirrorTrader
                 //var retVal = await Execute(() => client.OrderCalcProfit(order.OrderType, order.Symbol, order.Volume, order.Price, tick.bid, out profit));
                 //Console.WriteLine("profit: "+Math.Round(profit, 2));
                 double p = Math.Round((tick.bid - order.Price) * Math.Pow(10, digits), 2);
-                Console.WriteLine($"{symbol} {order.OrderType}_ID - {order.TicketId} - Open Price: {order.Price}, Ask: {tick.ask}, Bid: {tick.bid}, Profit: {p}, Level: {order.Level}, SL: {order.SL}");
+                Console.WriteLine($"{symbol} {order.OrderType}_ID - {order.TicketId} - Open Price: {order.Price}, Ask: {tick.ask}, Bid: {tick.bid}, Profit: {p}, Level: {order.Level}, SL: {order.SL}, TP: {order.TP}");
                 //Console.WriteLine("price: " + p);
 
                 // adjust sl if too high initially
@@ -604,7 +604,7 @@ namespace MirrorTrader
                 //var retVal = await Execute(() => client.OrderCalcProfit(order.OrderType, order.Symbol, order.Volume, order.Price, tick.ask, out profit));
                 //Console.WriteLine("profit: " + Math.Round(profit, 2));
                 double p = Math.Round((order.Price - tick.ask) * Math.Pow(10, digits), 2);
-                Console.WriteLine($"{symbol} {order.OrderType}_ID - {order.TicketId} - Open Price: {order.Price}, Ask: {tick.ask}, Bid: {tick.bid}, Profit: {p}, Level: {order.Level}, SL: {order.SL}");
+                Console.WriteLine($"{symbol} {order.OrderType}_ID - {order.TicketId} - Open Price: {order.Price}, Ask: {tick.ask}, Bid: {tick.bid}, Profit: {p}, Level: {order.Level}, SL: {order.SL}, TP: {order.TP}");
 
                 // adjust sl if too low initially
                 if (order.Level == 0 && tick.ask <= order.SL)
@@ -705,8 +705,8 @@ namespace MirrorTrader
                 {
                     double spread = tick.ask - tick.bid;
                     double limit = spread * factor;
-                    double price1 = tick.bid - limit;
-                    double price = tick.ask + limit;
+                    double priceStopOrder = tick.bid - limit;
+                    double priceLimitOrder = tick.ask + limit;
                     double diff = Math.Round(Math.Abs(tick.bid - order.Price),5);
                     // fake diff since it's zero
                     if(diff == 0)
@@ -731,8 +731,10 @@ namespace MirrorTrader
                                 diff = 0.01;
                         }
                     }
-                    double takeprofit = Math.Round((tick.bid - (diff * Factor)), 5)/*Math.Round((tick.bid + (diff * Factor)), 5)*/;
-                    double stoploss = Math.Round((tick.ask + diff), 5)/*Math.Round((tick.ask - diff), 5)*/;
+                    double takeprofit = Math.Round((tick.bid - (diff * Factor)), 5);
+                    double stoploss = Math.Round((tick.ask + diff), 5);
+                    //double takeprofit = Math.Round((tick.bid + (diff * Factor)), 5);
+                    //double stoploss = Math.Round((tick.ask - diff), 5);
                     //Console.WriteLine($"Buy: symbol {order.Symbol}, diff = {diff}, bid = {tick.bid}, openprice = {order.Price}, tp = {takeprofit}, sl = {stoploss}");
                     // setup trailing info
                     order.Ask = tick.ask;
@@ -749,11 +751,13 @@ namespace MirrorTrader
                     request.Action = ENUM_TRADE_REQUEST_ACTIONS.TRADE_ACTION_PENDING;
                     request.Symbol = symbol;
                     request.Volume = order.Volume;
-                    request.Price = price;
+                    //request.Price = priceStopOrder;
+                    request.Price = priceLimitOrder;
                     //request.Tp = takeprofit;
                     //request.Sl = stoploss;
                     //request.Type = ENUM_ORDER_TYPE.ORDER_TYPE_SELL_LIMIT/*ENUM_ORDER_TYPE.ORDER_TYPE_BUY_LIMIT*/;
-                    request.Type = ENUM_ORDER_TYPE.ORDER_TYPE_BUY_STOP;
+                    //request.Type = ENUM_ORDER_TYPE.ORDER_TYPE_BUY_STOP;
+                    request.Type = ENUM_ORDER_TYPE.ORDER_TYPE_SELL_LIMIT;
                     request.Type_filling = ENUM_ORDER_TYPE_FILLING.ORDER_FILLING_RETURN;
                     request.Type_time = ENUM_ORDER_TYPE_TIME.ORDER_TIME_DAY;
 
@@ -772,8 +776,8 @@ namespace MirrorTrader
                 {
                     double spread = tick.ask - tick.bid;
                     double limit = spread * factor;
-                    double price = tick.bid - limit;
-                    double price1 = tick.ask + limit;
+                    double priceStopOrder = tick.bid + limit;
+                    double priceLimitOrder = tick.ask - limit;
                     double diff = Math.Round(Math.Abs(tick.bid - order.Price), 5);
                     // fake diff since it's zero
                     if (diff == 0)
@@ -816,11 +820,13 @@ namespace MirrorTrader
                     request.Action = ENUM_TRADE_REQUEST_ACTIONS.TRADE_ACTION_PENDING;
                     request.Symbol = symbol;
                     request.Volume = order.Volume;
-                    request.Price = price;
+                    //request.Price = priceStopOrder;
+                    request.Price = priceLimitOrder;
                     //request.Tp = takeprofit;
                     //request.Sl = stoploss;
                     //request.Type = ENUM_ORDER_TYPE.ORDER_TYPE_BUY_LIMIT/*ENUM_ORDER_TYPE.ORDER_TYPE_SELL_LIMIT*/;
-                    request.Type = ENUM_ORDER_TYPE.ORDER_TYPE_SELL_STOP;
+                    //request.Type = ENUM_ORDER_TYPE.ORDER_TYPE_SELL_STOP;
+                    request.Type = ENUM_ORDER_TYPE.ORDER_TYPE_BUY_LIMIT;
                     request.Type_filling = ENUM_ORDER_TYPE_FILLING.ORDER_FILLING_RETURN;
                     request.Type_time = ENUM_ORDER_TYPE_TIME.ORDER_TIME_DAY;
                     //request.
