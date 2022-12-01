@@ -4,5 +4,5 @@
   "lots": 1,
   "timerDuration": 3,
   "factor": 0.20,
-  "thresholdFactor": 0.10
+  "thresholdFactor": 0.05
 }
