@@ -36,6 +36,12 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.2-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="QuickFix, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QuickFIXn.Core.1.10.0\lib\netstandard2.0\QuickFix.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickFix.FIX44, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QuickFIXn.FIX4.4.1.10.0\lib\netstandard2.0\QuickFix.FIX44.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +52,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\OrderAction.cs" />
+    <Compile Include="Enums\OrderType.cs" />
+    <Compile Include="Fix44\ClientApp.cs" />
+    <Compile Include="Fix44\Engine.cs" />
+    <Compile Include="Fix44\FixSymbol.cs" />
+    <Compile Include="Fix44\QuickFixApp.cs" />
+    <Compile Include="Fix44\MessageConstructor.cs" />
+    <Compile Include="Fix44\QuickFixT.cs" />
     <Compile Include="FxConfig.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Program.cs" />
@@ -54,6 +68,12 @@
   <ItemGroup>
     <None Include=".editorconfig" />
     <None Include="App.config" />
+    <None Include="Fix44\cserver_quote_session.cfg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Fix44\cserver_trade_session.cfg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="fxconfig.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -64,6 +84,12 @@
       <Project>{ac8b5010-da75-477e-9ca5-547c649e12d8}</Project>
       <Name>MtApi5</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Fix44\spec\FIX44.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

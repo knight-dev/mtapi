@@ -8,6 +8,8 @@ using System.Threading;
 using System.IO;
 using Newtonsoft.Json;
 using System.Timers;
+using MirrorTrader.Fix44;
+using MirrorTrader.Enums;
 
 namespace MirrorTrader
 {
@@ -17,8 +19,10 @@ namespace MirrorTrader
         static readonly MtApi5Client _mtapiSource = new MtApi5Client();
         static readonly MtApi5Client _mtapiDestination = new MtApi5Client();
         static List<Order> SourceOrderHistory = new List<Order>();
-        static List<Order> SourceOrderList = new List<Order>();
+        public static List<Order> SourceOrderList = new List<Order>();
         static List<Order> DestinationOrderHistory = new List<Order>();
+        static Engine fix44 = new Engine();
+        static ClientApp fixApp;
         static int sourcePort = 8228;
         static int destinationPort = 8229;
         static double lots = 0.03;
@@ -119,9 +123,13 @@ namespace MirrorTrader
             var dealId = e.Trans.Deal;
             var price = e.Trans.Price;
             //var comment = e.Trans.
+            if (transType == ENUM_TRADE_TRANSACTION_TYPE.TRADE_TRANSACTION_POSITION)
+            {
 
-            // order opened
-            if(transType == ENUM_TRADE_TRANSACTION_TYPE.TRADE_TRANSACTION_ORDER_ADD)
+            }
+
+                // order opened
+                if (transType == ENUM_TRADE_TRANSACTION_TYPE.TRADE_TRANSACTION_ORDER_ADD)
             {
                 Order order = SourceOrderList.Where(x => x.TicketId == position).FirstOrDefault();
                 if (order != null)
@@ -130,15 +138,18 @@ namespace MirrorTrader
                     {
                         // close order
                         //CloseRequest(_mtapiDestination, order.Magic);
-                        ClosePendingOrder(_mtapiDestination, order.Magic); // close destination order
+
+                        //uncomment this /*ClosePendingOrder(_mtapiDestination, order.Magic);*/ // close destination order
+
                         //CloseLossOrder(_mtapiDestination, order);
-                        
+                        //fix44.CloseMarketOrder(order, orderType == ENUM_ORDER_TYPE.ORDER_TYPE_BUY ? OrderType.Buy : OrderType.Sell, 0.01, symbol);
+                        fixApp.CloseMarketOrder(order, orderType == ENUM_ORDER_TYPE.ORDER_TYPE_BUY ? OrderType.Buy : OrderType.Sell, 0.01, symbol);
                         //CheckOrderProfit(_mtapiSource, order);
 
                         // remove from list
                         SourceOrderList.Remove(order);
                         Console.ForegroundColor = ConsoleColor.Red;
-                        QuoteRequest(_mtapiSource, symbol);
+                        /*QuoteRequest(_mtapiSource, symbol);*/
                         //Console.WriteLine($"Source order closed: {symbol} {volume} - Type: {orderType}, Price: {price}, Ticket: {orderId}, Position: {position}, Now: {DateTime.Now}");
                         Console.ForegroundColor = ConsoleColor.White;
                     }
@@ -157,10 +168,17 @@ namespace MirrorTrader
 
                     // open destination order
                     //OpenRequest(_mtapiDestination, order);
-                    PendingOrderRequest(_mtapiDestination, order);
+                    //uncomment this/*PendingOrderRequest(_mtapiDestination, order);*/
 
+                    
+                    
                     // add to history
                     SourceOrderList.Add(order); // orders removed once closed
+
+                    // fix api - call after source order added
+                    //fix44.OpenMarketOrder(order, orderType == ENUM_ORDER_TYPE.ORDER_TYPE_BUY ? OrderType.Buy : OrderType.Sell, 0.01, symbol);
+                    fixApp.PlaceMarketOrder(order, orderType == ENUM_ORDER_TYPE.ORDER_TYPE_BUY ? OrderType.Buy : OrderType.Sell, 0.01, symbol);
+                    
                     SourceOrderHistory.Add(order); // orders not removed.. keep a full log to compare with destination orders
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     QuoteRequest(_mtapiSource, symbol);
@@ -173,7 +191,7 @@ namespace MirrorTrader
             // order opened
             if (transType == ENUM_TRADE_TRANSACTION_TYPE.TRADE_TRANSACTION_DEAL_ADD)
             {
-                Order order = SourceOrderList.Where(x => x.TicketId == orderId).FirstOrDefault();
+                /*Order order = SourceOrderList.Where(x => x.TicketId == orderId).FirstOrDefault();
                 if(order != null)
                 {
                     // update order deal
@@ -183,10 +201,10 @@ namespace MirrorTrader
                     order.PositionId = position;
 
                     Console.ForegroundColor = ConsoleColor.Green;
-                    QuoteRequest(_mtapiSource, symbol);
+                    *//*QuoteRequest(_mtapiSource, symbol);*//*
                     Console.WriteLine($"Source deal made (Ticket:{orderId}, Position:{position}): {symbol} {volume} - Type: {orderType}, Price: {price}, Ticket: {orderId}, Position: {position}, Now: {DateTime.Now}");
                     Console.ForegroundColor = ConsoleColor.White;
-                }
+                }*/
             }
 
             // order closed 
@@ -301,7 +319,7 @@ namespace MirrorTrader
         {
             Console.WriteLine("Close order timer elapsed");
             System.Timers.Timer timer = (System.Timers.Timer)sender;
-            // close loss order after elpased time
+            // close loss order after elapsed time
             if(order != null)
             {
                 //timer.AutoReset = false;
@@ -377,9 +395,17 @@ namespace MirrorTrader
 
         private static void Run()
         {
+            //fix44.PriceFeedLogon();
+            //fix44.TradeFeedLogon();
+            //fix44.PriceFeedStreamConnect();
+
+            fixApp = new ClientApp("Fix44/cserver_quote_session.cfg");
+            //fixApp.Start();
+            //fixApp.GetMarketData(FixSymbols.Find("EURUSD").id.ToString());
+
             ConsoleKeyInfo cki;
             do
-            {
+            {                
                 cki = Console.ReadKey();
                 switch (cki.KeyChar.ToString())
                 {
@@ -404,6 +430,8 @@ namespace MirrorTrader
 
         private static async void Buy()
         {
+            
+            //fix44.OpenMarketOrder(1, OrderType.Buy, 0.01, "EURUSD");
             const string symbol = "EURUSD";
             const double volume = 0.1;
             MqlTradeResult tradeResult = null;
@@ -413,7 +441,8 @@ namespace MirrorTrader
 
         
         private static async void Sell()
-        {
+        {            
+            //fix44.OpenMarketOrder(1, OrderType.Sell, 0.01);
             const string symbol = "EURUSD";
             const double volume = 0.1;
             MqlTradeResult tradeResult = null;
@@ -759,12 +788,12 @@ namespace MirrorTrader
                     request.Symbol = symbol;
                     request.Volume = order.Volume;
                     //request.Price = priceStopOrder;
-                    request.Price = profit > 0 ? priceStopOrder : priceLimitOrder;
+                    request.Price = profit < 0 ? priceStopOrder : priceStopOrder;
                     //request.Tp = takeprofit;
                     //request.Sl = stoploss;
                     //request.Type = ENUM_ORDER_TYPE.ORDER_TYPE_SELL_LIMIT/*ENUM_ORDER_TYPE.ORDER_TYPE_BUY_LIMIT*/;
                     //request.Type = ENUM_ORDER_TYPE.ORDER_TYPE_BUY_STOP;
-                    request.Type = profit > 0 ? ENUM_ORDER_TYPE.ORDER_TYPE_SELL_STOP : ENUM_ORDER_TYPE.ORDER_TYPE_BUY_STOP;
+                    request.Type = profit < 0 ? ENUM_ORDER_TYPE.ORDER_TYPE_SELL_STOP : ENUM_ORDER_TYPE.ORDER_TYPE_BUY_LIMIT;
                     request.Type_filling = ENUM_ORDER_TYPE_FILLING.ORDER_FILLING_RETURN;
                     request.Type_time = ENUM_ORDER_TYPE_TIME.ORDER_TIME_DAY;
 
@@ -831,12 +860,12 @@ namespace MirrorTrader
                     request.Symbol = symbol;
                     request.Volume = order.Volume;
                     //request.Price = priceStopOrder;
-                    request.Price = profit > 0 ? priceStopOrder : priceLimitOrder;
+                    request.Price = profit < 0 ? priceStopOrder : priceStopOrder;
                     //request.Tp = takeprofit;
                     //request.Sl = stoploss;
                     //request.Type = ENUM_ORDER_TYPE.ORDER_TYPE_BUY_LIMIT/*ENUM_ORDER_TYPE.ORDER_TYPE_SELL_LIMIT*/;
                     //request.Type = ENUM_ORDER_TYPE.ORDER_TYPE_SELL_STOP;
-                    request.Type = profit > 0 ? ENUM_ORDER_TYPE.ORDER_TYPE_BUY_STOP : ENUM_ORDER_TYPE.ORDER_TYPE_SELL_STOP;
+                    request.Type = profit < 0 ? ENUM_ORDER_TYPE.ORDER_TYPE_BUY_STOP : ENUM_ORDER_TYPE.ORDER_TYPE_SELL_LIMIT;
                     request.Type_filling = ENUM_ORDER_TYPE_FILLING.ORDER_FILLING_RETURN;
                     request.Type_time = ENUM_ORDER_TYPE_TIME.ORDER_TIME_DAY;
                     //request.
