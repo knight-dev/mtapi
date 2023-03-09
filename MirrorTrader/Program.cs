@@ -375,14 +375,14 @@ namespace MirrorTrader
             _mtapiSource.BeginConnect(sourcePort);
             _connnectionWaiter.WaitOne();
 
-            _mtapiDestination.ConnectionStateChanged += _mtapi_DestinationConnectionStateChanged;
+            /*_mtapiDestination.ConnectionStateChanged += _mtapi_DestinationConnectionStateChanged;
             //_mtapiDestination.QuoteAdded += _mtapi_QuoteAdded;
             //_mtapiDestination.QuoteRemoved += _mtapi_QuoteRemoved;
             //_mtapiDestination.QuoteUpdate += _mtapi_QuoteUpdate;
             _mtapiDestination.OnTradeTransaction += _mtapi_DestinationTradeUpdate;
 
             _mtapiDestination.BeginConnect(destinationPort);
-            _connnectionWaiter.WaitOne();
+            _connnectionWaiter.WaitOne();*/
 
             if (_mtapiSource.ConnectionState == Mt5ConnectionState.Connected)
             {
